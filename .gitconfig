@@ -1,0 +1,34 @@
+[user]
+        name = Stefanie Koenig
+        email = stefanie.koenig@dollarshaveclub.com
+[alias]
+        co = checkout
+        cnb = checkout -b
+        pnb = push -u origin
+        cm = commit -m
+        pll = pull origin
+        psh = push origin
+        conflicts = !git ls-files -u | cut -f 2 | sort -u
+        s = status
+        st = status
+        undo-commit = reset --soft HEAD^
+        glo = log --oneline
+        cp = cherry-pick
+	rdiff = "!g() { origin=$(git config --get remote.origin.url | sed \"s/git@/https:\\/\\//g\" | sed \"s/.com:/.com\\//g\"); url=${origin/.git/\\/commit\\/$(git rev-parse HEAD)}; open $url; }; g"
+	cob = checkout
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	fab = "!g() { git status | lolcat; }; g"
+	fabulous = "!g() { git status | lolcat; }; g"
+	cci = "!g() { branch=`git rev-parse --abbrev-ref HEAD`; top_level=`git rev-parse --show-toplevel`; repo=`basename $top_level`; url=\"https://circleci.com/gh/MakerStudios/$repo/tree/$branch\"; open $url; }; g"
+	destroy = "!g() { git branch -D $1 && git push origin $1 --delete; }; g"
+[color]
+        ui = true
+[push]
+        default = current
+[filter "media"]
+        clean = git-media-clean %f
+        smudge = git-media-smudge %f
+[filter "lfs"]
+        clean = git-lfs clean %f
+        smudge = git-lfs smudge %f
+        required = true
